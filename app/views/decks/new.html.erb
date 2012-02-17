@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(:uploadform, :url => {:action => "create"}) do |f| %>
+<% if @deck.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@deck.errors.count, "error") %> prohibited this deck from being saved:</h2>
+
+     <ul>
+     <% @deck.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+
+<%= f.label :name, "Enter name of new deck" %>
+<%= f.text_field :name %>
+<br><br>
+<%= f.label :file, "Upload CSV File" %>
+<%= f.file_field :file %>
+<br><br>
+
+<%= f.submit %>
+<% end %>

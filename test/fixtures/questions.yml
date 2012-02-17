@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyString
+  correct_answer_id: 1
+  deck_id: 1
+
+two:
+  content: MyString
+  correct_answer_id: 1
+  deck_id: 1

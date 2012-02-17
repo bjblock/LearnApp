@@ -1,0 +1,22 @@
+<h1>Deck No. <%= @deck.id %>: <%= @deck.name %></h1>
+
+<p id="notice"><%= notice %></p>
+<br>
+
+<p>
+  <b>Question:</b>
+  <%= @question.content %>
+</p>
+
+<br>
+
+<p>
+  <b>Choose an answer:</b>
+	<ol>
+		<% @quiz.shuffle.each do |q| %>
+		<li><%=  link_to q.content, "check/#{@question.id}/#{q.id}" %></li>
+		<% end %> 	
+	</ol>
+</p>
+
+<%= link_to 'Back to Home', root_path %>
