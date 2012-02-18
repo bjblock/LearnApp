@@ -8,6 +8,9 @@ LearnApp::Application.routes.draw do
   
   post "pages/quiz"
   
+  get "decks/shownext/:id" => 'decks#shownext'
+  get "decks/show/:id" => 'decks#show'
+  
   get "decks/check/:qid/:aid" => "decks#check"
 
   resources :decks

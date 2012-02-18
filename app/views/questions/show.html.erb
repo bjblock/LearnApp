@@ -1,24 +1,16 @@
+<h1>Deck No. <%= @question.deck.id %>: <%= @question.deck.name %></h1>
+<br>
 <p id="notice"><%= notice %></p>
 
 
-
-
-
-
 <p>
-  <% %>
-</p>
-
-<p>
-  <b>Correct answer:</b>
-  <%= @question.correct_answer_id %>
-</p>
-
-<p>
-  <b>Deck:</b>
-  <%= @question.deck_id %>
+  The correct answer is:
+  <b><%= @question.answer.content %></b>
 </p>
 
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<br>
+<h2><%= link_to 'Next', deck_url(@question.deck) %> </h2>
+
+
+<%= link_to 'Back to Home', root_path %>

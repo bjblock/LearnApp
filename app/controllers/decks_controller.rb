@@ -14,11 +14,50 @@ class DecksController < ApplicationController
 
   # GET /decks/1
   # GET /decks/1.json
-  def show
+def show
+   if session[:the_deck].present?
+     
+      @deck = Deck.find(session[:the_deck])
+      
+      
+      if session[:current_q].present?
+      
+      @question = Question.find(session[:current_q])
+
+      
+      
+       @question = @question.next
+       session[:current_q] = @question.next
+      
+        @quiz = Array.new
+        
+        3.times do 
+          answer = @question.answers
+          answer = answer.shuffle
+          @quiz << answer.first
+       end
+        
+        @quiz << @question.answer
+        
+      respond_to do |format|
+        format.html # show.html.erb
+       format.json { render json: @deck }
+      end
+    else
+      flash[:notice] = "You finished this Deck!"
+      redirect_to root_url
+      
+    end
+      
+   else
+     
     @deck = Deck.find(params[:id])
+    session[:the_deck] = @deck.id
+    session[:current_q] = @deck.questions.first.id
+    
+    
     
      @question = @deck.questions.first
-      answer = @question.answer
 
       @quiz = Array.new
       
@@ -40,6 +79,8 @@ class DecksController < ApplicationController
       format.json { render json: @deck }
     end
   end
+end
+  
   
   def check
     @question = Question.find(params[:qid])
@@ -55,6 +96,7 @@ class DecksController < ApplicationController
     end
     
     redirect_to question_url(@question)
+   
   end
 
   # GET /decks/new

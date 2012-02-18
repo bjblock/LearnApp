@@ -8,4 +8,8 @@ class Question < ActiveRecord::Base
   
   has_many :answers, :through => :choices
   
+  def next
+    self.class.find(:first, :conditions => ["id > ?",self.id])
+  end
+  
 end

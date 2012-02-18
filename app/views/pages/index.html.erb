@@ -1,6 +1,8 @@
 <h1>LearnApp Home</h1>
 <br>
 
+<p id="notice"><%= notice %></p>
+
 <%= form_for :deckselect, :url => {:action => :quiz} do |f| %>
 <%= f.label 'Enter your question deck ID'%>
 <%= f.text_field :id %>
@@ -10,4 +12,4 @@
 <br><br>
 
 <%= link_to "Create a new question deck (through CSV file)", new_deck_url%> <br>
-<%= link_to "Create a new question deck (through form)", "#"%>
+<del><%= link_to "Create a new question deck (through form)", "#"%></del>
