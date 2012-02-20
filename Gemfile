@@ -6,13 +6,15 @@ gem 'rails', '3.2.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :production do
-	gem 'ruby-debug19', :require => 'ruby-debug'
 	gem 'pg'
 end
 
 group :development do
-	gem 'ruby-debug19', :require => 'ruby-debug'
 	gem 'sqlite3'
+end
+
+group :test do
+	gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 # Gems used only for assets and not required
@@ -32,6 +34,3 @@ gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use debugger
-
