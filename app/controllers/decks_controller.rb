@@ -20,8 +20,10 @@ def show
       @deck = Deck.find(session[:the_deck])
       
       
-      if session[:current_q].present?
-      
+      if session[:current_q].blank?
+        flash[:notice] = "You finished this Deck!"
+        redirect_to root_url
+      else
       @question = Question.find(session[:current_q])
 
       
@@ -31,11 +33,13 @@ def show
       
         @quiz = Array.new
         
-        3.times do 
-          answer = @question.answers
-          answer = answer.shuffle
-          @quiz << answer.first
-       end
+     
+          wrong_answers = @question.answers
+          wrong_answers = wrong_answers.shuffle!
+          @quiz << wrong_answers.first
+          @quiz << wrong_answers.second
+          @quiz << wrong_answers.third
+      
         
         @quiz << @question.answer
         
@@ -43,9 +47,6 @@ def show
         format.html # show.html.erb
        format.json { render json: @deck }
       end
-    else
-      flash[:notice] = "You finished this Deck!"
-      redirect_to root_url
       
     end
       
@@ -61,11 +62,11 @@ def show
 
       @quiz = Array.new
       
-      3.times do 
-        answer = @question.answers
-        answer = answer.shuffle
-        @quiz << answer.first
-      end
+      wrong_answers = @question.answers
+      wrong_answers = wrong_answers.shuffle!
+      @quiz << wrong_answers.first
+      @quiz << wrong_answers.second
+      @quiz << wrong_answers.third
       
       # FJ: Version with all Answers as choices
       # @question.answers.each do |answer|
