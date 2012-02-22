@@ -1,8 +1,7 @@
 require "csv"
 
 class DecksController < ApplicationController
-  # GET /decks
-  # GET /decks.json
+
   def index
     @decks = Deck.all
 
@@ -19,36 +18,33 @@ def show
      
       @deck = Deck.find(session[:the_deck])
       
+      Rails.logger.info session[:current_q].inspect
       
       if session[:current_q].blank?
         flash[:notice] = "You finished this Deck!"
         redirect_to root_url
       else
-      @question = Question.find(session[:current_q])
-
+        @question = Question.find(session[:current_q])
       
-      
-       @question = @question.next
-       session[:current_q] = @question.next
+        @question = @question.next
+        session[:current_q] = @question.next
       
         @quiz = Array.new
         
      
-          wrong_answers = @question.answers
-          wrong_answers = wrong_answers.shuffle!
-          @quiz << wrong_answers.first
-          @quiz << wrong_answers.second
-          @quiz << wrong_answers.third
-      
+        wrong_answers = @question.answers
+        wrong_answers = wrong_answers.shuffle!
+        @quiz << wrong_answers.first
+        @quiz << wrong_answers.second
+        @quiz << wrong_answers.third
         
         @quiz << @question.answer
         
-      respond_to do |format|
-        format.html # show.html.erb
-       format.json { render json: @deck }
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: @deck }
+        end
       end
-      
-    end
       
    else
      
@@ -56,24 +52,22 @@ def show
     session[:the_deck] = @deck.id
     session[:current_q] = @deck.questions.first.id
     
-    
-    
-     @question = @deck.questions.first
+    @question = @deck.questions.first
 
-      @quiz = Array.new
+    @quiz = Array.new
       
-      wrong_answers = @question.answers
-      wrong_answers = wrong_answers.shuffle!
-      @quiz << wrong_answers.first
-      @quiz << wrong_answers.second
-      @quiz << wrong_answers.third
+    wrong_answers = @question.answers
+    wrong_answers = wrong_answers.shuffle!
+    @quiz << wrong_answers.first
+    @quiz << wrong_answers.second
+    @quiz << wrong_answers.third
       
       # FJ: Version with all Answers as choices
       # @question.answers.each do |answer|
       #   @quiz << answer
       # end
 
-      @quiz << @question.answer
+    @quiz << @question.answer
 
     respond_to do |format|
       format.html # show.html.erb
@@ -83,38 +77,33 @@ def show
 end
   
   
-  def check
-    @question = Question.find(params[:qid])
+def check
+  @question = Question.find(params[:qid])
     
+  @answer = params[:aid]
     
-    @answer = params[:aid]
+  if @question.correct_answer_id == @answer.to_i
+    flash[:notice] = "Correct!"  
+  else
+    flash[:notice] = "Wrong!"
+  end
     
-    if @question.correct_answer_id == @answer.to_i
-      flash[:notice] = "Correct!"
-    
-    else
-      flash[:notice] = "Wrong!"
-    end
-    
-    redirect_to question_url(@question)
+  redirect_to question_url(@question)
    
-  end
+end
 
-  # GET /decks/new
-  # GET /decks/new.json
-  def new
-    @deck = Deck.new
+def new
+  @deck = Deck.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @deck }
-    end
+  respond_to do |format|
+    format.html # new.html.erb
+    format.json { render json: @deck }
   end
+end
 
-  # GET /decks/1/edit
-  def edit
-    @deck = Deck.find(params[:id])
-  end
+def edit
+  @deck = Deck.find(params[:id])
+end
 
   # POST /decks
   # POST /decks.json
