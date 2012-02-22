@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def index
-    reset_session
+    session[:current_q] = nil
+    session[:the_deck] = nil
   end
   
   def quiz

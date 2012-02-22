@@ -18,16 +18,16 @@ def show
      
       @deck = Deck.find(session[:the_deck])
       
-      Rails.logger.info session[:current_q].inspect
+      @question = Question.find(session[:current_q])
+    
+      @question = @question.next
       
-      if session[:current_q].blank?
+      if @question.blank?
         flash[:notice] = "You finished this Deck!"
         redirect_to root_url
       else
-        @question = Question.find(session[:current_q])
-      
-        @question = @question.next
-        session[:current_q] = @question.next
+        
+        session[:current_q] = @question.id
       
         @quiz = Array.new
         
