@@ -1,5 +1,8 @@
 <h1>Deck No. <%= @deck.id %>: <%= @deck.name %></h1>
 
+<br>
+
+<div id="countdown">You were too slow!</div>
 <p id="notice"><%= notice %></p>
 <br>
 
@@ -14,7 +17,7 @@
   <b>Choose an answer:</b>
 	<ol>
 		<% @quiz.shuffle.each do |q| %>
-		<li><%=  link_to q.content, "check/#{@question.id}/#{q.id}" %></li>
+		<li data-question-id="<%= @question.id %>" data-answer-id="<%= q.id %>" class="choice"><%=  link_to q.content, "check/#{@question.id}/#{q.id}" %></li>
 		<% end %> 	
 	</ol>
 </p>

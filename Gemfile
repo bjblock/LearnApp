@@ -29,8 +29,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'ruby-ole-patched-for-home_run'
+gem 'rubyzip', :require => 'zip/zipfilesystem'         # required for roo
+gem 'spreadsheet'     # require for roo
+gem 'nokogiri'
 
 gem 'jquery-rails'
+gem 'roo'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,3 +1,8 @@
+<h1>Create a new Quiz Deck </h1>
+<br>
+<p>We currently support: CSV, XLS, XLSX and ODS-Files.<br> Google Spreadsheet support coming soon!</p>
+<br>
+
 <p id="notice"><%= notice %></p>
 
 <%= form_for(:uploadform, :url => {:action => "create"}) do |f| %>
@@ -22,3 +27,6 @@
 
 <%= f.submit %>
 <% end %>
+
+<br><br>
+<%= link_to 'Back', root_url %>
