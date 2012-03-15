@@ -16,4 +16,14 @@ id = setInterval(function() {
         newElement.innerHTML = "You can get " + counter.toString() + " points.";
     }
 }, 1000);
+$("li.choice a").click(function(){
+	// if (@question.correct_answer_id == @answer.to_i) {
+	var score = counter;
+	var totalScore = parseInt($.cookie('totalScore')) + score;
+	$.cookie('totalScore', totalScore, { path: '/' });
+	// alert("Score = " + score.toString() + "Total Score = " + totalScore.toString());
+	alert($.cookie('totalScore'));
+	
+// }
+});
 });

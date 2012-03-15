@@ -6,7 +6,7 @@
 <%= form_for :deckselect, :url => {:action => :quiz} do |f| %>
 <%= f.label 'Enter your question deck ID'%>
 <%= f.text_field :id %>
-<%= f.submit "Start studying!"%>
+<%= f.submit "Start studying!", :id => 'start' %>
 <% end %>
 
 <br><br>

@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   def index
     session[:current_q] = nil
     session[:the_deck] = nil
+    render :layout => 'custom'
   end
   
   def quiz
